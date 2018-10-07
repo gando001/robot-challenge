@@ -24,11 +24,22 @@ describe CommandParser do
 	end
 
 	describe "#command_args" do
-		let(:args) { "place,1,2,North" }
-		let(:expected_output) { ["1","2","North"] }
+		context "when there are args" do
+			let(:args) { "place 1,2,North" }
+			let(:expected_output) { ["1","2","North"] }
 
-		it "returns the args without the first item" do
-			expect(command_parser.command_args).to eq(expected_output)
+			it "returns the args without the first item" do
+				expect(command_parser.command_args).to eq(expected_output)
+			end
+		end
+
+		context "when there are no args" do
+			let(:args) { "move" }
+			let(:expected_output) { [] }
+
+			it "returns the args without the first item" do
+				expect(command_parser.command_args).to eq(expected_output)
+			end
 		end
 	end
 end

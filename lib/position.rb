@@ -1,8 +1,9 @@
 class Position
-	NORTH = 'NORTH'
-	EAST = 'EAST'
-	SOUTH = 'SOUTH'
-	WEST = 'WEST'
+	NORTH = 'north'
+	EAST = 'east'
+	SOUTH = 'south'
+	WEST = 'west'
+	VALID_ORIENTATIONS = [NORTH, EAST, SOUTH, WEST]
 
 	attr_reader :x, :y, :orientation
 
@@ -13,6 +14,10 @@ class Position
 	end
 
 	def to_s
-		"Output: #{x}, #{y}, #{orientation}"
+		"Output: #{x}, #{y}, #{orientation.upcase}"
+	end
+
+	def valid_orientation?
+		VALID_ORIENTATIONS.include?(orientation)
 	end
 end

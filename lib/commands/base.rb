@@ -24,6 +24,6 @@ class Base
 	end
 
 	def position_on_table?(position)
-		table.within_bounds?(position)
+		table.within_bounds?(position) && position.valid_orientation?
 	end
 end

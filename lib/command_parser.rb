@@ -8,7 +8,7 @@ class CommandParser
 	attr_reader :args
 
 	def initialize(args:)
-		@args = args.split(',')
+		@args = args.split(' ')
 	end
 
 	def parse
@@ -19,12 +19,12 @@ class CommandParser
 	end
 
 	def command_args
-		args.drop(1)
+		args.drop(1).join.split(',')
 	end
 
 	private
 
 	def basename
-		args.first
+		args.first.strip
 	end
 end
