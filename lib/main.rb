@@ -19,7 +19,7 @@ class Main
 			user_interface.request_command
 			requested_command = user_interface.read_command
 
-			next if requested_command&.strip.length.zero?
+			next unless valid_request?(requested_command)
 
 			break if terminating?(requested_command)
 
@@ -40,6 +40,10 @@ class Main
 
 	def user_interface
 		@user_interface ||= UserInterface.new
+	end
+
+	def valid_request?(command)
+		!command&.strip.length.zero?
 	end
 
 	def report_command?(command)
