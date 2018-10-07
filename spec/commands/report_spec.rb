@@ -1,16 +1,15 @@
 require "spec_helper"
 require "commands/report"
-require "Robot"
+require "robot"
 
 describe Report do
-	let(:robot) { instance_double("Robot") }
-	let(:command) { Report.new(args: nil, robot: robot) }
+	let(:position) { Position.new(x: 2, y: 2, orientation: Position::NORTH) }
+	let(:robot) { Robot.new(position: position) }
+	let(:command) { Report.new(args: nil, table: nil, robot: robot) }
 
 	describe "#process" do
-		it "instructs the robot to output its position" do
-			expect(robot).to receive(:to_s)
-
-			command.execute
+		it "returns the robots position" do
+			expect(command.execute).to eq("Output: 2, 2, NORTH")
 		end
 	end
 end

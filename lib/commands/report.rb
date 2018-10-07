@@ -2,7 +2,7 @@ require "commands/base"
 
 class Report < Base
 	def process
-		robot.to_s
+		robot.position.to_s
 	end
 
 	private

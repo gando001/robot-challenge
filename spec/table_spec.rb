@@ -8,7 +8,7 @@ describe Table do
 		subject(:within_bounds) { table.within_bounds?(position) }
 
 		context "when the position is within bounds" do
-			let(:position) { Position.new(0, 0) }
+			let(:position) { Position.new(x: 0, y: 0, orientation: Position::NORTH) }
 
 			it "returns true" do
 				expect(within_bounds).to be true
@@ -16,7 +16,7 @@ describe Table do
 		end
 
 		context "when the row position is not within bounds" do
-			let(:position) { Position.new(-1, 0) }
+			let(:position) { Position.new(x: -1, y: 0, orientation: Position::NORTH) }
 
 			it "returns false" do
 				expect(within_bounds).to be false
@@ -24,7 +24,7 @@ describe Table do
 		end
 
 		context "when the column position is not within bounds" do
-			let(:position) { Position.new(0, -1) }
+			let(:position) { Position.new(x: 0, y: -1, orientation: Position::NORTH) }
 
 			it "returns false" do
 				expect(within_bounds).to be false

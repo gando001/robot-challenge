@@ -1,8 +1,9 @@
 class Base
-	attr_reader :args, :robot
+	attr_reader :args, :table, :robot
 
-	def initialize(args:, robot:)
+	def initialize(args:, table:, robot:)
 		@args = args
+		@table = table
 		@robot = robot
 	end
 
@@ -20,5 +21,9 @@ class Base
 
 	def process
 		raise NotImplementedError
+	end
+
+	def position_on_table?(position)
+		table.within_bounds?(position)
 	end
 end

@@ -2,14 +2,14 @@ require "spec_helper"
 require "commands/base"
 
 describe Base do
-	let(:command) { Base.new(args: nil, robot: nil) }
+	let(:command) { Base.new(args: nil, table: nil, robot: nil) }
 
 	describe "#execute" do
 		context "when the command is invalid" do
 			it "raises no error" do
 				expect(command).to receive(:valid?).and_return(false)
 
-				expect { command.execute }.not_to raise_error
+				expect { command.execute }.to_not raise_error
 			end
 		end
 

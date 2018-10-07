@@ -2,13 +2,11 @@ require "spec_helper"
 require "robot"
 
 describe Robot do
-	let(:table) { Table.new(rows: 5, columns: 5) }
-	let(:robot) { Robot.new(position: position, direction: nil, table: table) }
+	let(:position) { Position.new(x: 0, y: 0, orientation: Position::NORTH) }
+	let(:robot) { Robot.new(position: position) }
 
 	describe "#valid_position?" do
-		let(:position) { Position.new(0, 0) }
-
-		context "when the robot has a valid position" do
+		context "when the robot has a position" do
 			it "returns true" do
 				expect(robot.valid_position?).to be true
 			end
@@ -21,13 +19,14 @@ describe Robot do
 				expect(robot.valid_position?).to be false
 			end
 		end
+	end
 
-		context "when the robots position is out of bounds" do
-			let(:position) { Position.new(-1, 0) }
+	describe "#move_to" do
+		let(:current_position) { robot.position }
+		let(:new_position) { Position.new(x: 0, y: 0, orientation: Position::NORTH) }
 
-			it "returns false" do
-				expect(robot.valid_position?).to be false
-			end
+		it "alters the robots position" do
+			expect { robot.move_to(new_position) }.to change { robot.position }.from(current_position).to(new_position)
 		end
 	end
 end

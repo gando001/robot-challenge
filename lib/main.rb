@@ -32,7 +32,7 @@ class Main
 	end
 
 	def robot
-		@robot ||= Robot.new(position: nil, direction: nil, table: table)
+		@robot ||= Robot.new(position: nil)
 	end
 
 	def user_interface
@@ -44,7 +44,7 @@ class Main
 		command_name = parser.parse
 
 		unless command_name.nil?
-			command = command_name.new(args: parser.command_args, robot: robot)
+			command = command_name.new(args: parser.command_args, table: table, robot: robot)
       command.execute
     end
   end

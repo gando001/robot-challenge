@@ -3,14 +3,55 @@ require "commands/right"
 require "Robot"
 
 describe Right do
-	let(:robot) { instance_double("Robot") }
-	let(:command) { Right.new(args: nil, robot: robot) }
+	let(:orientation) { Position::NORTH }
+	let(:position) { Position.new(x: 0, y: 0, orientation: orientation) }
+	let(:table) { Table.new(rows: 5, columns: 5) }
+	let(:robot) { Robot.new(position: position) }
+	let(:command) { Right.new(args: nil, table: table, robot: robot) }
 
 	describe "#process" do
-		it "instructs the robot to turn right" do
-			expect(robot).to receive(:turn_right)
+		context "when the command is invalid" do
+			it "does not move the robot" do
+    		expect(command).to receive(:valid?).and_return(false)
 
-			command.execute
+				expect { command.execute }.to_not change { robot.position }
+			end
+		end
+
+		context "when the current orientation is north" do
+			let(:orientation) { Position::NORTH }
+
+			it "rotates the robot to the east" do
+				expect { command.execute }.to change { robot.position }
+				expect(robot.position.orientation).to eq(Position::EAST)
+			end
+		end
+
+		context "when the current orientation is west" do
+			let(:orientation) { Position::WEST }
+
+			it "rotates the robot to the north" do
+				expect { command.execute }.to change { robot.position }
+				expect(robot.position.orientation).to eq(Position::NORTH)
+			end
+		end
+
+		context "when the current orientation is south" do
+			let(:orientation) { Position::SOUTH }
+
+			it "rotates the robot to the west" do
+				expect { command.execute }.to change { robot.position }
+				expect(robot.position.orientation).to eq(Position::WEST)
+			end
+		end
+
+		context "when the current orientation is east" do
+			let(:orientation) { Position::EAST }
+
+			it "rotates the robot to the south" do
+				expect { command.execute }.to change { robot.position }
+				expect(robot.position.orientation).to eq(Position::SOUTH)
+			end
 		end
 	end
 end
