@@ -1,5 +1,6 @@
-class Table
+require "position"
 
+class Table
 	attr_reader :rows, :columns
 
 	def initialize(rows:, columns:)

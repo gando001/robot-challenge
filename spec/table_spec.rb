@@ -1,6 +1,5 @@
 require "spec_helper"
 require "table"
-require "position"
 
 describe Table do
 	let(:table) { Table.new(rows: 5, columns: 5) }
