@@ -1,5 +1,5 @@
-require "commands/base"
-require "position"
+require_relative "base"
+require_relative "../position"
 
 class Right < Base
 	def process

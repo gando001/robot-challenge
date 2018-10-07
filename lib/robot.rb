@@ -1,4 +1,4 @@
-require "position"
+require_relative "position"
 
 class Robot
 	attr_reader :position

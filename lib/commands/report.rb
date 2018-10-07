@@ -1,4 +1,4 @@
-require "commands/base"
+require_relative "base"
 
 class Report < Base
 	def process

@@ -1,4 +1,4 @@
-require "commands/base"
+require_relative "base"
 
 class Place < Base
 	def process
