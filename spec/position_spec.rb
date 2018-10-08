@@ -7,7 +7,7 @@ describe Position do
 
 	describe "#to_s" do
 		it "returns the position as a string" do
-			expect(position.to_s).to eq("Output: 0, 0, NORTH")
+			expect(position.to_s).to eq("Output: 0,0,NORTH")
 		end
 	end
 

@@ -14,7 +14,7 @@ class Position
 	end
 
 	def to_s
-		"Output: #{x}, #{y}, #{orientation.upcase}"
+		"Output: #{x},#{y},#{orientation.upcase}"
 	end
 
 	def valid_orientation?

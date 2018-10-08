@@ -9,7 +9,7 @@ describe Report do
 
 	describe "#process" do
 		it "returns the robots position" do
-			expect(command.execute).to eq("Output: 2, 2, NORTH")
+			expect(command.execute).to eq("Output: 2,2,NORTH")
 		end
 	end
 end
