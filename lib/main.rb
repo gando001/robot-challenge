@@ -14,14 +14,11 @@ class Main
 
 	def run
 		loop do
-			user_interface.request_command
-			requested_command = user_interface.read_command
+			requested_command = request_command
 
-			next unless valid_request?(requested_command)
+			process_request(requested_command) if valid_request?(requested_command)
 
 			break if terminating?(requested_command)
-
-			process_request(requested_command)
     end
 	end
 
@@ -51,16 +48,31 @@ class Main
 		["q", "quit", "exit"].include?(command.strip.downcase)
 	end
 
+	def request_command
+		user_interface.request_command
+		user_interface.read_command
+	end
+
+	def report_output(output)
+		user_interface.write_message(output)
+	end
+
 	def process_request(requested_command)
-		parser = CommandParser.new(args: requested_command)
+		command = build_command(requested_command)
+		execute_command(command)
+  end
+
+  def build_command(requested_command)
+  	parser = CommandParser.new(args: requested_command)
 		command_name = parser.parse
 
-		unless command_name.nil?
-			command = command_name.new(args: parser.command_args, table: table, robot: robot)
-      output = command.execute
+  	command_name.new(args: parser.command_args, table: table, robot: robot)
+  end
 
-      user_interface.write_message(output) if report_command?(command)
-    end
+  def execute_command(command)
+    output = command.execute
+
+    report_output(output) if report_command?(command)
   end
 end
 

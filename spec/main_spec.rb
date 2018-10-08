@@ -2,34 +2,24 @@ require "spec_helper"
 require "main"
 
 describe Main do
-	let(:user_interface) { instance_double("UserInterface") }
 	let(:main) { Main.new(rows: 5, columns: 5) }
 
-	before do
-		allow(main).to receive(:user_interface).and_return(user_interface)
-	end
-
 	describe "#run" do
-		it "stops when issued terminating command" do
-			expect(user_interface).to receive(:request_command)
-			expect(user_interface).to receive(:read_command).and_return("QUIT")
+		let(:quit_command) { "QUIT" }
 
-			expect(main).to_not receive(:process_request)
+		it "stops when issued terminating command" do
+			expect(main).to receive(:request_command).once.and_return(quit_command)
 
 			main.run
 		end
 
-		context "when the command is unknown" do
-			it "continues to ask for commands until a known command is given" do
+		context "when the command is empty" do
+			it "continues to ask for commands until a command is given" do
 				5.times do |_|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return("")
-
-					expect(main).to_not receive(:process_request)
+					expect(main).to receive(:request_command).and_return("")
 				end
 
-				expect(user_interface).to receive(:request_command)
-				expect(user_interface).to receive(:read_command).and_return("QUIT")
+				expect(main).to receive(:request_command).and_return(quit_command)
 
 				main.run
 			end
@@ -39,13 +29,12 @@ describe Main do
 			let(:command) { "move" }
 
 			it "processes the command" do
-				expect(user_interface).to receive(:request_command)
-				expect(user_interface).to receive(:read_command).and_return(command)
+				expect(main).to receive(:request_command).and_return(command)
 
-				expect(main).to receive(:process_request).with(command)
+				expect(main).to receive(:process_request).once.with(command)
 
-				expect(user_interface).to receive(:request_command)
-				expect(user_interface).to receive(:read_command).and_return("QUIT")
+				expect(main).to receive(:request_command).and_return(quit_command)
+				expect(main).to receive(:process_request).once.with(quit_command)
 
 				main.run
 			end
@@ -59,11 +48,10 @@ describe Main do
 
 			it "reports 0,1,NORTH" do
 				commands.each do |command|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return(command)
+					expect(main).to receive(:request_command).and_return(command)
 				end
 
-				expect(user_interface).to receive(:write_message).with(expected_output)
+				expect(main).to receive(:report_output).with(expected_output)
 
 				main.run
 			end
@@ -75,11 +63,10 @@ describe Main do
 
 			it "reports 0,0,WEST" do
 				commands.each do |command|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return(command)
+					expect(main).to receive(:request_command).and_return(command)
 				end
 
-				expect(user_interface).to receive(:write_message).with(expected_output)
+				expect(main).to receive(:report_output).with(expected_output)
 
 				main.run
 			end
@@ -91,11 +78,10 @@ describe Main do
 
 			it "reports 3,3,NORTH" do
 				commands.each do |command|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return(command)
+					expect(main).to receive(:request_command).and_return(command)
 				end
 
-				expect(user_interface).to receive(:write_message).with(expected_output)
+				expect(main).to receive(:report_output).with(expected_output)
 
 				main.run
 			end
@@ -107,11 +93,10 @@ describe Main do
 
 			it "ignores all commands before the PLACE command" do
 				commands.each do |command|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return(command)
+					expect(main).to receive(:request_command).and_return(command)
 				end
 
-				expect(user_interface).to receive(:write_message).with(expected_output)
+				expect(main).to receive(:report_output).with(expected_output)
 
 				main.run
 			end
@@ -124,13 +109,11 @@ describe Main do
 
 			it "accepts all PLACE commands" do
 				commands.each do |command|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return(command)
+					expect(main).to receive(:request_command).and_return(command)
 				end
 
-
-				expect(user_interface).to receive(:write_message).with(expected_output_after_first_place_command)
-				expect(user_interface).to receive(:write_message).with(expected_output_after_second_place_command)
+				expect(main).to receive(:report_output).with(expected_output_after_first_place_command)
+				expect(main).to receive(:report_output).with(expected_output_after_second_place_command)
 
 				main.run
 			end
@@ -142,11 +125,10 @@ describe Main do
 
 			it "ignores all unknown commands" do
 				commands.each do |command|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return(command)
+					expect(main).to receive(:request_command).and_return(command)
 				end
 
-				expect(user_interface).to receive(:write_message).with(expected_output)
+				expect(main).to receive(:report_output).with(expected_output)
 
 				main.run
 			end
@@ -158,11 +140,10 @@ describe Main do
 
 			it "prevents from going out of bounds" do
 				commands.each do |command|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return(command)
+					expect(main).to receive(:request_command).and_return(command)
 				end
 
-				expect(user_interface).to receive(:write_message).with(expected_output)
+				expect(main).to receive(:report_output).with(expected_output)
 
 				main.run
 			end
@@ -180,11 +161,10 @@ describe Main do
 
 			it "ignores unknown commands and processes known commands" do
 				commands.each do |command|
-					expect(user_interface).to receive(:request_command)
-					expect(user_interface).to receive(:read_command).and_return(command)
+					expect(main).to receive(:request_command).and_return(command)
 				end
 
-				expect(user_interface).to receive(:write_message).with(expected_output)
+				expect(main).to receive(:report_output).with(expected_output)
 
 				main.run
 			end
