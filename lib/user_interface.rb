@@ -1,8 +1,4 @@
 class UserInterface
-	def greeting
-		write_message("Welcome!")
-	end
-
 	def request_command
 		write_message("Enter a command")
 	end
