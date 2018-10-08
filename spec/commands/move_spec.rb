@@ -24,7 +24,7 @@ describe Move do
 				let(:orientation) { Position::NORTH }
 
 				it "moves the robot to the north" do
-					expect { command.execute }.to change { robot.position.x }.by(Move::STEP)
+					expect { command.execute }.to change { robot.position.y }.by(Move::STEP)
 				end
 			end
 
@@ -32,7 +32,7 @@ describe Move do
 				let(:orientation) { Position::WEST }
 
 				it "rotates the robot to the south" do
-					expect { command.execute }.to change { robot.position.y }.by(Move::STEP * -1)
+					expect { command.execute }.to change { robot.position.x }.by(-Move::STEP)
 				end
 			end
 
@@ -40,7 +40,7 @@ describe Move do
 				let(:orientation) { Position::SOUTH }
 
 				it "rotates the robot to the east" do
-					expect { command.execute }.to change { robot.position.x }.by(-Move::STEP)
+					expect { command.execute }.to change { robot.position.y }.by(-Move::STEP)
 				end
 			end
 
@@ -48,7 +48,7 @@ describe Move do
 				let(:orientation) { Position::EAST }
 
 				it "rotates the robot to the north" do
-					expect { command.execute }.to change { robot.position.y }.by(Move::STEP)
+					expect { command.execute }.to change { robot.position.x }.by(Move::STEP)
 				end
 			end
 		end

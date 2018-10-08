@@ -19,13 +19,13 @@ class Move < Base
 
 			case position.orientation
 				when Position::NORTH
-					Position.new(x: position.x + STEP, y: position.y, orientation: position.orientation)
-				when Position::WEST
-					Position.new(x: position.x, y: position.y - STEP, orientation: position.orientation)
-				when Position::SOUTH
-					Position.new(x: position.x - STEP, y: position.y, orientation: position.orientation)
-				else
 					Position.new(x: position.x, y: position.y + STEP, orientation: position.orientation)
+				when Position::WEST
+					Position.new(x: position.x - STEP, y: position.y, orientation: position.orientation)
+				when Position::SOUTH
+					Position.new(x: position.x, y: position.y - STEP, orientation: position.orientation)
+				else
+					Position.new(x: position.x + STEP, y: position.y, orientation: position.orientation)
 			end
 		end
 	end
