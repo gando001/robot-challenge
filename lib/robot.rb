@@ -1,17 +1,17 @@
 require_relative "position"
 
 class Robot
-	attr_reader :position
+  attr_reader :position
 
-	def initialize(position:)
-		@position = position
-	end
+  def initialize(position:)
+    @position = position
+  end
 
-	def valid_position?
-		!position.nil?
-	end
+  def valid_position?
+    !position.nil?
+  end
 
-	def move_to(position)
-		@position = position
-	end
+  def move_to(position)
+    @position = position
+  end
 end

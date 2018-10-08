@@ -1,12 +1,12 @@
 require_relative "base"
 
 class Unknown < Base
-	def process
-	end
+  def process
+  end
 
-	private
+  private
 
-	def valid?
-		true
-	end
+  def valid?
+    true
+  end
 end

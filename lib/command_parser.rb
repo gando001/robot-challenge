@@ -6,26 +6,26 @@ require_relative "commands/place"
 require_relative "commands/unknown"
 
 class CommandParser
-	attr_reader :args
+  attr_reader :args
 
-	def initialize(args:)
-		@args = args.split(' ')
-	end
+  def initialize(args:)
+    @args = args.split(' ')
+  end
 
-	def parse
-		classname = "#{basename.capitalize}"
+  def parse
+    classname = "#{basename.capitalize}"
     classname = "Unknown" unless Object.const_defined?(classname)
 
     Object.const_get(classname)
-	end
+  end
 
-	def command_args
-		args.drop(1).join.split(',')
-	end
+  def command_args
+    args.drop(1).join.split(',')
+  end
 
-	private
+  private
 
-	def basename
-		args.first.strip
-	end
+  def basename
+    args.first.strip
+  end
 end
