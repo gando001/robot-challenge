@@ -13,8 +13,6 @@ class Main
 	end
 
 	def run
-		user_interface.greeting
-
 		loop do
 			user_interface.request_command
 			requested_command = user_interface.read_command
@@ -25,7 +23,6 @@ class Main
 
 			process_request(requested_command)
     end
-
 	end
 
 	private
@@ -67,4 +64,4 @@ class Main
   end
 end
 
-Main.new(rows: 5, columns: 5).run
+# Main.new(rows: 5, columns: 5).run
