@@ -15,10 +15,10 @@ describe CommandParser do
 		end
 
 		context "when the given command is unknown" do
-			let(:args) { "unknown" }
+			let(:args) { "test" }
 
-			it "returns nil" do
-				expect(command_parser.parse).to be_nil
+			it "returns the unknown command" do
+				expect(command_parser.parse).to eq(Unknown)
 			end
 		end
 	end
