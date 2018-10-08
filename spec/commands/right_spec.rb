@@ -1,6 +1,6 @@
 require "spec_helper"
 require "commands/right"
-require "Robot"
+require "robot"
 
 describe Right do
 	let(:orientation) { Position::NORTH }
