@@ -4,7 +4,7 @@ require_relative "position"
 require_relative "command_parser"
 require_relative "user_interface"
 
-class Main
+class Simulator
   attr_reader :rows, :columns
 
   def initialize(rows:, columns:)
@@ -16,9 +16,9 @@ class Main
     loop do
       requested_command = request_command
 
-      process_request(requested_command) if valid_request?(requested_command)
-
       break if terminating?(requested_command)
+
+      process_request(requested_command)
     end
   end
 
@@ -58,6 +58,8 @@ class Main
   end
 
   def process_request(requested_command)
+    return unless valid_request?(requested_command)
+
     command = build_command(requested_command)
     execute_command(command)
   end
@@ -76,4 +78,4 @@ class Main
   end
 end
 
-# Main.new(rows: 5, columns: 5).run
+# Simulator.new(rows: 5, columns: 5).run

@@ -1,32 +1,32 @@
 require "spec_helper"
-require "main"
+require "simulator"
 
-describe Main do
-  let(:main) { Main.new(rows: 5, columns: 5) }
+describe Simulator do
+  let(:simulator) { Simulator.new(rows: 5, columns: 5) }
   let(:quit_command) { "QUIT" }
 
   def quit_simulator
-    expect(main).to receive(:request_command).and_return(quit_command)
+    expect(simulator).to receive(:request_command).and_return(quit_command)
   end
 
   describe "#run" do
     def execute_test
       quit_simulator
-      main.run
+      simulator.run
     end
 
     it "stops when issued terminating command" do
-      expect(main).to receive(:request_command).once.and_return(quit_command)
+      expect(simulator).to receive(:request_command).once.and_return(quit_command)
 
-      expect(main).to_not receive(:process_request).with(quit_command)
+      expect(simulator).to_not receive(:process_request).with(quit_command)
 
-      main.run
+      simulator.run
     end
 
     context "when the command is empty" do
       it "continues to ask for commands until a command is given" do
         5.times do |_|
-          expect(main).to receive(:request_command).and_return("")
+          expect(simulator).to receive(:request_command).and_return("")
         end
 
         execute_test
@@ -37,8 +37,8 @@ describe Main do
       let(:command) { "move" }
 
       it "processes the command" do
-        expect(main).to receive(:request_command).and_return(command)
-        expect(main).to receive(:process_request).once.with(command)
+        expect(simulator).to receive(:request_command).and_return(command)
+        expect(simulator).to receive(:process_request).once.with(command)
 
         execute_test
       end
@@ -48,12 +48,12 @@ describe Main do
   describe "integration tests" do
     def apply_commands
       commands.each do |command|
-        expect(main).to receive(:request_command).and_return(command)
+        expect(simulator).to receive(:request_command).and_return(command)
       end
     end
 
     def check_output
-      expect(main).to receive(:report_output).with(expected_output)
+      expect(simulator).to receive(:report_output).with(expected_output)
     end
 
     def execute_test
@@ -61,7 +61,7 @@ describe Main do
       check_output
 
       quit_simulator
-      main.run
+      simulator.run
     end
 
     context "simple commands; example 1" do
@@ -109,12 +109,12 @@ describe Main do
       it "accepts all PLACE commands" do
         apply_commands
 
-        expect(main).to receive(:report_output).with(expected_output_after_first_place_command)
-        expect(main).to receive(:report_output).with(expected_output_after_second_place_command)
-        expect(main).to receive(:report_output).with(expected_output_after_third_place_command)
+        expect(simulator).to receive(:report_output).with(expected_output_after_first_place_command)
+        expect(simulator).to receive(:report_output).with(expected_output_after_second_place_command)
+        expect(simulator).to receive(:report_output).with(expected_output_after_third_place_command)
 
         quit_simulator
-        main.run
+        simulator.run
       end
     end
 
