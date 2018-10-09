@@ -8,6 +8,6 @@ class Report < Base
   private
 
   def valid?
-    true
+    robot.valid_position?
   end
 end

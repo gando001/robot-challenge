@@ -74,6 +74,8 @@ class Simulator
   def execute_command(command)
     output = command.execute
 
-    report_output(output) if report_command?(command)
+    if output && report_command?(command)
+      report_output(output)
+    end
   end
 end

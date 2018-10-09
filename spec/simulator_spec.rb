@@ -92,7 +92,7 @@ describe Simulator do
     end
 
     context "when given commands before a PLACE command" do
-      let(:commands) { ["MOVE", "MOVE", "LEFT", "MOVE", "PLACE 1,2,EAST", "REPORT"] }
+      let(:commands) { ["MOVE", "MOVE", "LEFT", "REPORT", "MOVE", "PLACE 1,2,EAST", "REPORT"] }
       let(:expected_output) { "Output: 1,2,EAST" }
 
       it "ignores all commands before the PLACE command" do
