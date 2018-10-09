@@ -1,5 +1,5 @@
-require "spec_helper"
-require "user_interface"
+require_relative "spec_helper"
+require_relative "../lib/robot_challenge/user_interface"
 
 describe UserInterface do
   let(:interface) { UserInterface.new }

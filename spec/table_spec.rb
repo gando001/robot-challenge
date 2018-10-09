@@ -1,5 +1,5 @@
-require "spec_helper"
-require "table"
+require_relative "spec_helper"
+require_relative "../lib/robot_challenge/table"
 
 describe Table do
   let(:table) { Table.new(rows: 5, columns: 5) }

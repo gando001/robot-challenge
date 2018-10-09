@@ -1,5 +1,5 @@
-require "spec_helper"
-require "simulator"
+require_relative "spec_helper"
+require_relative "../lib/robot_challenge/simulator"
 
 describe Simulator do
   let(:simulator) { Simulator.new(rows: 5, columns: 5) }

@@ -1,5 +1,5 @@
-require "spec_helper"
-require "position"
+require_relative "spec_helper"
+require_relative "../lib/robot_challenge/position"
 
 describe Position do
   let(:orientation) { Position::NORTH }

@@ -1,5 +1,5 @@
-require "spec_helper"
-require "commands/base"
+require_relative "../spec_helper"
+require_relative "../../lib/robot_challenge/commands/base"
 
 describe Base do
   let(:command) { Base.new(args: nil, table: nil, robot: nil) }

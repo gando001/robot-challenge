@@ -1,7 +1,7 @@
-require "spec_helper"
-require "commands/move"
-require "table"
-require "robot"
+require_relative "../spec_helper"
+require_relative "../../lib/robot_challenge/commands/move"
+require_relative "../../lib/robot_challenge/table"
+require_relative "../../lib/robot_challenge/robot"
 
 describe Move do
   let(:orientation) { Position::NORTH }
@@ -20,6 +20,10 @@ describe Move do
     end
 
     context "when the command is valid" do
+      before do
+        expect(command).to receive(:valid?).and_return(true)
+      end
+
       context "when the current orientation is north" do
         let(:orientation) { Position::NORTH }
 

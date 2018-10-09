@@ -1,7 +1,7 @@
-require "spec_helper"
-require "commands/place"
-require "table"
-require "robot"
+require_relative "../spec_helper"
+require_relative "../../lib/robot_challenge/commands/place"
+require_relative "../../lib/robot_challenge/table"
+require_relative "../../lib/robot_challenge/robot"
 
 describe Place do
   let(:table) { Table.new(rows: 5, columns: 5) }
@@ -27,6 +27,10 @@ describe Place do
     end
 
     context "when the command is valid" do
+      before do
+        expect(command).to receive(:valid?).and_return(true)
+      end
+
       it "sets the robots position" do
         expect { command.execute }.to change { robot.position }
 

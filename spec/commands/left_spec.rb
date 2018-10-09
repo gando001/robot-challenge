@@ -1,7 +1,7 @@
-require "spec_helper"
-require "commands/left"
-require "table"
-require "robot"
+require_relative "../spec_helper"
+require_relative "../../lib/robot_challenge/commands/left"
+require_relative "../../lib/robot_challenge/table"
+require_relative "../../lib/robot_challenge/robot"
 
 describe Left do
   let(:orientation) { Position::NORTH }
@@ -19,39 +19,45 @@ describe Left do
       end
     end
 
-    context "when the current orientation is north" do
-      let(:orientation) { Position::NORTH }
-
-      it "rotates the robot to the west" do
-        expect { command.execute }.to change { robot.position }
-        expect(robot.position.orientation).to eq(Position::WEST)
+    context "when the command is valid" do
+      before do
+        expect(command).to receive(:valid?).and_return(true)
       end
-    end
 
-    context "when the current orientation is west" do
-      let(:orientation) { Position::WEST }
+      context "when the current orientation is north" do
+        let(:orientation) { Position::NORTH }
 
-      it "rotates the robot to the south" do
-        expect { command.execute }.to change { robot.position }
-        expect(robot.position.orientation).to eq(Position::SOUTH)
+        it "rotates the robot to the west" do
+          expect { command.execute }.to change { robot.position }
+          expect(robot.position.orientation).to eq(Position::WEST)
+        end
       end
-    end
 
-    context "when the current orientation is south" do
-      let(:orientation) { Position::SOUTH }
+      context "when the current orientation is west" do
+        let(:orientation) { Position::WEST }
 
-      it "rotates the robot to the east" do
-        expect { command.execute }.to change { robot.position }
-        expect(robot.position.orientation).to eq(Position::EAST)
+        it "rotates the robot to the south" do
+          expect { command.execute }.to change { robot.position }
+          expect(robot.position.orientation).to eq(Position::SOUTH)
+        end
       end
-    end
 
-    context "when the current orientation is east" do
-      let(:orientation) { Position::EAST }
+      context "when the current orientation is south" do
+        let(:orientation) { Position::SOUTH }
 
-      it "rotates the robot to the north" do
-        expect { command.execute }.to change { robot.position }
-        expect(robot.position.orientation).to eq(Position::NORTH)
+        it "rotates the robot to the east" do
+          expect { command.execute }.to change { robot.position }
+          expect(robot.position.orientation).to eq(Position::EAST)
+        end
+      end
+
+      context "when the current orientation is east" do
+        let(:orientation) { Position::EAST }
+
+        it "rotates the robot to the north" do
+          expect { command.execute }.to change { robot.position }
+          expect(robot.position.orientation).to eq(Position::NORTH)
+        end
       end
     end
   end
