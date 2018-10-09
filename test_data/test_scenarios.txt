@@ -1,0 +1,62 @@
+# Scenario 1 - multiple PLACE commands
+
+PLACE 0,0,SOUTH
+PLACE 3,4,EAST
+PLACE 4,2,SOUTH
+REPORT
+PLACE 2,1,SOUTH
+PLACE 2,4,WEST
+PLACE 1,1,NORTH
+PLACE 4,4,WEST
+REPORT
+
+# Expected output:
+Output: 4,2,SOUTH
+Output: 4,4,WEST
+******************************************************************
+# Scenario 2 - attempt to move out of bounds
+
+PLACE 0,0,SOUTH
+MOVE
+MOVE
+MOVE
+REPORT
+
+# Expected output:
+Output: 0,0,SOUTH
+******************************************************************
+# Scenario 3 - invalid commands
+
+PLACE 0,0,SOUTH
+MVE
+MOE
+ME
+REPORT
+
+# Expected output:
+Output: 0,0,SOUTH
+******************************************************************
+# Scenario 4 - mixture of valid and invalid commands
+
+PLACE 0,0,SOUTH
+MVE
+REPORT
+LEFT
+MOVE
+REPORT
+PLACE 4,4,WEST
+MOVE
+REPORT
+ABC
+LEFT
+MOVE
+REPORT
+RIGHT
+REPORT
+
+# Expected output:
+Output: 0,0,SOUTH
+Output: 1,0,EAST
+Output: 3,4,WEST
+Output: 3,3,SOUTH
+Output: 3,3,WEST
