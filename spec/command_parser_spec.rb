@@ -1,6 +1,6 @@
-require "spec_helper"
-require "commands/move"
-require "command_parser"
+require_relative "spec_helper"
+require_relative "../lib/robot_challenge/commands/move"
+require_relative "../lib/robot_challenge/command_parser"
 
 describe CommandParser do
   let(:command_parser) { CommandParser.new(args: args) }

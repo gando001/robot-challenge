@@ -77,5 +77,3 @@ class Simulator
     report_output(output) if report_command?(command)
   end
 end
-
-# Simulator.new(rows: 5, columns: 5).run
