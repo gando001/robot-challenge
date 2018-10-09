@@ -95,3 +95,5 @@ ruby lib\robot_challenge.rb
 cd robot_challenge
 rake
 ```
+
+Further test scenarios are available in test_data/test_scenarios.txt
