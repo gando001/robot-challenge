@@ -3,11 +3,11 @@ require_relative "../../lib/robot_challenge/commands/place"
 require_relative "../../lib/robot_challenge/table"
 require_relative "../../lib/robot_challenge/robot"
 
-describe Place do
+describe Command::Place do
   let(:table) { Table.new(rows: 5, columns: 5) }
   let(:robot) { Robot.new(position: nil) }
   let(:args) { ["2", "2", "North"] }
-  let(:command) { Place.new(args: args, table: table, robot: robot) }
+  let(:command) { Command::Place.new(args: args, table: table, robot: robot) }
 
   describe "#process" do
     context "when the command is invalid" do
@@ -16,13 +16,21 @@ describe Place do
 
         expect { command.execute }.to_not change { robot.position }
       end
-    end
 
-    context "when there are no args" do
-      let(:args) { [] }
+      context "when there are no args" do
+        let(:args) { [] }
 
-      it "does not change the robots position" do
-        expect { command.execute }.to_not change { robot.position }
+        it "does not change the robots position" do
+          expect { command.execute }.to_not change { robot.position }
+        end
+      end
+
+      context "when there are missing args" do
+        let(:args) { ["1","NORTH"] }
+
+        it "does not change the robots position" do
+          expect { command.execute }.to_not change { robot.position }
+        end
       end
     end
 

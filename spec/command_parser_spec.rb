@@ -10,7 +10,7 @@ describe CommandParser do
       let(:args) { "move" }
 
       it "returns the matching command object" do
-        expect(command_parser.parse).to eq(Move)
+        expect(command_parser.parse).to eq(Command::Move)
       end
     end
 
@@ -18,7 +18,7 @@ describe CommandParser do
       let(:args) { "test" }
 
       it "returns the unknown command" do
-        expect(command_parser.parse).to eq(Unknown)
+        expect(command_parser.parse).to eq(Command::Unknown)
       end
     end
   end

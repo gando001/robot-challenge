@@ -1,12 +1,14 @@
 require_relative "base"
 
-class Unknown < Base
-  def process
-  end
+module Command
+  class Unknown < Base
+    def process
+    end
 
-  private
+    private
 
-  def valid?
-    true
+    def valid?
+      true
+    end
   end
 end

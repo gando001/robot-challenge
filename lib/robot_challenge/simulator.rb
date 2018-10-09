@@ -41,7 +41,7 @@ class Simulator
   end
 
   def report_command?(command)
-    command.instance_of?(Report)
+    command.instance_of?(Command::Report)
   end
 
   def terminating?(command)

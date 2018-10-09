@@ -3,12 +3,12 @@ require_relative "../../lib/robot_challenge/commands/move"
 require_relative "../../lib/robot_challenge/table"
 require_relative "../../lib/robot_challenge/robot"
 
-describe Move do
+describe Command::Move do
   let(:orientation) { Position::NORTH }
   let(:position) { Position.new(x: 2, y: 2, orientation: orientation) }
   let(:table) { Table.new(rows: 5, columns: 5) }
   let(:robot) { Robot.new(position: position) }
-  let(:command) { Move.new(args: nil, table: table, robot: robot) }
+  let(:command) { Command::Move.new(args: nil, table: table, robot: robot) }
 
   describe "#process" do
     context "when the command is invalid" do
@@ -28,7 +28,7 @@ describe Move do
         let(:orientation) { Position::NORTH }
 
         it "moves the robot to the north" do
-          expect { command.execute }.to change { robot.position.y }.by(Move::STEP)
+          expect { command.execute }.to change { robot.position.y }.by(Command::Move::STEP)
         end
       end
 
@@ -36,7 +36,7 @@ describe Move do
         let(:orientation) { Position::WEST }
 
         it "rotates the robot to the south" do
-          expect { command.execute }.to change { robot.position.x }.by(-Move::STEP)
+          expect { command.execute }.to change { robot.position.x }.by(-Command::Move::STEP)
         end
       end
 
@@ -44,7 +44,7 @@ describe Move do
         let(:orientation) { Position::SOUTH }
 
         it "rotates the robot to the east" do
-          expect { command.execute }.to change { robot.position.y }.by(-Move::STEP)
+          expect { command.execute }.to change { robot.position.y }.by(-Command::Move::STEP)
         end
       end
 
@@ -52,7 +52,7 @@ describe Move do
         let(:orientation) { Position::EAST }
 
         it "rotates the robot to the north" do
-          expect { command.execute }.to change { robot.position.x }.by(Move::STEP)
+          expect { command.execute }.to change { robot.position.x }.by(Command::Move::STEP)
         end
       end
     end

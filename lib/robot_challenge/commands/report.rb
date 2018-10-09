@@ -1,13 +1,15 @@
 require_relative "base"
 
-class Report < Base
-  def process
-    robot.position.to_s
-  end
+module Command
+  class Report < Base
+    def process
+      robot.position.to_s
+    end
 
-  private
+    private
 
-  def valid?
-    robot.valid_position?
+    def valid?
+      robot.valid_position?
+    end
   end
 end

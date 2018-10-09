@@ -2,10 +2,10 @@ require_relative "../spec_helper"
 require_relative "../../lib/robot_challenge/commands/report"
 require_relative "../../lib/robot_challenge/robot"
 
-describe Report do
+describe Command::Report do
   let(:position) { Position.new(x: 2, y: 2, orientation: Position::NORTH) }
   let(:robot) { Robot.new(position: position) }
-  let(:command) { Report.new(args: nil, table: nil, robot: robot) }
+  let(:command) { Command::Report.new(args: nil, table: nil, robot: robot) }
 
   describe "#process" do
     context "when the command is invalid" do

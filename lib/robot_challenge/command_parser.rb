@@ -13,14 +13,14 @@ class CommandParser
   end
 
   def parse
-    classname = "#{basename.capitalize}"
-    classname = "Unknown" unless Object.const_defined?(classname)
+    classname = "Command::#{basename.capitalize}"
+    classname = "Command::Unknown" unless Object.const_defined?(classname)
 
     Object.const_get(classname)
   end
 
   def command_args
-    args.drop(1).join.split(',')
+    args.drop(1).join.split(',').reject { |arg| arg.length.zero? }
   end
 
   private

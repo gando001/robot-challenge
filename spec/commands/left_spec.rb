@@ -3,12 +3,12 @@ require_relative "../../lib/robot_challenge/commands/left"
 require_relative "../../lib/robot_challenge/table"
 require_relative "../../lib/robot_challenge/robot"
 
-describe Left do
+describe Command::Left do
   let(:orientation) { Position::NORTH }
   let(:position) { Position.new(x: 0, y: 0, orientation: orientation) }
   let(:table) { Table.new(rows: 5, columns: 5) }
   let(:robot) { Robot.new(position: position) }
-  let(:command) { Left.new(args: nil, table: table, robot: robot) }
+  let(:command) { Command::Left.new(args: nil, table: table, robot: robot) }
 
   describe "#process" do
     context "when the command is invalid" do
