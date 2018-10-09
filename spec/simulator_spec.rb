@@ -119,7 +119,7 @@ describe Simulator do
     end
 
     context "when given unknown commands" do
-      let(:commands) { ["A", "B", "B", "PLACE 1,2,EAST", "REPORT"] }
+      let(:commands) { ["A", "B", "1244", "A(*(@#@#}{>>>,...AS", "PLACE 1,2,EAST", "REPORT"] }
       let(:expected_output) { "Output: 1,2,EAST" }
 
       it "ignores all unknown commands" do
