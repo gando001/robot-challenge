@@ -33,7 +33,7 @@ class CommandParser
   end
 
   def command_name
-    @command_name ||= args.first.gsub(/[^A-z]/, "").strip
+    @command_name ||= args.first.gsub("^", "").gsub(/[^A-z]/, "").strip
   end
 
   def command_class

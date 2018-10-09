@@ -17,7 +17,7 @@ describe CommandParser do
     end
 
     context "when the given command is invalid" do
-      let(:args) { "test" }
+      let(:args) { "test^&^*" }
 
       it "returns the unknown command" do
         expect(command_parser).to receive(:valid_command?).and_return(false)
