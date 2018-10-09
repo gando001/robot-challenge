@@ -1,4 +1,7 @@
 # robot-challenge
+
+[![Build Status](https://travis-ci.com/gando001/robot-challenge.svg?branch=master)](https://travis-ci.com/gando001/robot-challenge)
+
 Simple console app that mimics a robots movements on a grid
 
 ## Description
@@ -57,4 +60,38 @@ LEFT
 MOVE
 REPORT
 Output: 3,3,NORTH
+```
+
+## Setup
+
+* Install Ruby 2.5.1
+* Install bundler
+```
+gem install bundler
+```
+* Clone this repo:
+```
+https://github.com/gando001/robot-challenge
+```
+* Change directory:
+```
+cd robot_challenge
+```
+* Run install gems
+```
+bundle install
+```
+
+### Running the Robot Challenge
+
+```
+cd robot_challenge
+ruby lib\robot_challenge.rb
+```
+
+### Running the Robot Challenge Tests
+
+```
+cd robot_challenge
+rake
 ```
