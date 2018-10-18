@@ -2,7 +2,7 @@ require_relative "spec_helper"
 require_relative "../lib/robot_challenge/table"
 
 describe Table do
-  let(:table) { Table.new(rows: 5, columns: 5) }
+  let(:table) { Table.new }
 
   describe "#within_bounds?" do
     subject(:within_bounds) { table.within_bounds?(position) }

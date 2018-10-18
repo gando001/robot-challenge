@@ -6,7 +6,7 @@ require_relative "../../lib/robot_challenge/robot"
 describe Command::Move do
   let(:orientation) { Position::NORTH }
   let(:position) { Position.new(x: 2, y: 2, orientation: orientation) }
-  let(:table) { Table.new(rows: 5, columns: 5) }
+  let(:table) { Table.new }
   let(:robot) { Robot.new(position: position) }
   let(:command) { Command::Move.new(args: nil, table: table, robot: robot) }
 
