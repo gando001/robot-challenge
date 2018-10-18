@@ -5,7 +5,7 @@ require_relative "../../lib/robot_challenge/robot"
 
 describe Command::Place do
   let(:table) { Table.new }
-  let(:robot) { Robot.new(position: nil) }
+  let(:robot) { Robot.new }
   let(:args) { ["2", "2", "North"] }
   let(:command) { Command::Place.new(args: args, table: table, robot: robot) }
 
