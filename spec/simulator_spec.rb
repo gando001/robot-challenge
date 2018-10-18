@@ -2,7 +2,13 @@ require_relative "spec_helper"
 require_relative "../lib/robot_challenge/simulator"
 
 describe Simulator do
-  let(:simulator) { Simulator.new(rows: 5, columns: 5) }
+  let(:simulator) do
+  Simulator.new(
+      table: table,
+      robot: robot,
+      user_interface: user_interface
+    )
+  end
   let(:quit_command) { "QUIT" }
 
   def quit_simulator
@@ -10,6 +16,10 @@ describe Simulator do
   end
 
   describe "#run" do
+    let(:table) { instance_double("Table") }
+    let(:robot) { instance_double("Robot") }
+    let(:user_interface) { instance_double("UserInterface") }
+
     def execute_test
       quit_simulator
       simulator.run
@@ -46,6 +56,10 @@ describe Simulator do
   end
 
   describe "integration tests" do
+    let(:table) { Table.new }
+    let(:robot) { Robot.new }
+    let(:user_interface) { UserInterface.new }
+
     def apply_commands
       commands.each do |command|
         expect(simulator).to receive(:request_command).and_return(command)

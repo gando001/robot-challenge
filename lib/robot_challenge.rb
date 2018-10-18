@@ -1,3 +1,11 @@
 require_relative "robot_challenge/simulator"
 
-Simulator.new(rows: 5, columns: 5).run
+table = Table.new
+robot = Robot.new
+user_interface = UserInterface.new
+
+Simulator.new(
+  table: table,
+  robot: robot,
+  user_interface: user_interface
+).run

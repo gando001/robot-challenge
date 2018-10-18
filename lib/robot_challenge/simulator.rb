@@ -5,11 +5,12 @@ require_relative "command_parser"
 require_relative "user_interface"
 
 class Simulator
-  attr_reader :rows, :columns
+  attr_reader :table, :robot, :user_interface
 
-  def initialize(rows:, columns:)
-    @rows = rows
-    @columns = columns
+  def initialize(table:, robot:, user_interface:)
+    @table = table
+    @robot = robot
+    @user_interface = user_interface
   end
 
   def run
@@ -23,18 +24,6 @@ class Simulator
   end
 
   private
-
-  def table
-    @table ||= Table.new(rows: rows, columns: columns)
-  end
-
-  def robot
-    @robot ||= Robot.new(position: nil)
-  end
-
-  def user_interface
-    @user_interface ||= UserInterface.new
-  end
 
   def valid_request?(command)
     !command&.strip.length.zero?

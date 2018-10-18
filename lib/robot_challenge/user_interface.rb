@@ -4,7 +4,7 @@ class UserInterface
   end
 
   def read_command
-    gets
+    STDIN.gets
   end
 
   def write_message(message)
