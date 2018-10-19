@@ -1,7 +1,7 @@
 require_relative "base"
 require_relative "../position"
 
-module Command
+module Commands
   class Right < Base
     def process
       next_position = Position.new(

@@ -1,6 +1,6 @@
 require_relative "base"
 
-module Command
+module Commands
   class Move < Base
     STEP = 1
 

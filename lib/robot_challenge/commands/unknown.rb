@@ -1,6 +1,6 @@
 require_relative "base"
 
-module Command
+module Commands
   class Unknown < Base
     def process
     end

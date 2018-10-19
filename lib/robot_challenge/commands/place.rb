@@ -1,6 +1,6 @@
 require_relative "base"
 
-module Command
+module Commands
   class Place < Base
     def process
       robot.move_to(next_position)

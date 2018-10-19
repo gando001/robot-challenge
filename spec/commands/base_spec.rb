@@ -1,8 +1,8 @@
 require_relative "../spec_helper"
 require_relative "../../lib/robot_challenge/commands/base"
 
-describe Command::Base do
-  let(:command) { Command::Base.new(args: nil, table: nil, robot: nil) }
+describe Commands::Base do
+  let(:command) { Commands::Base.new(args: nil, table: nil, robot: nil) }
 
   describe "#execute" do
     context "when the command is invalid" do

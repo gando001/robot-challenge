@@ -3,11 +3,11 @@ require_relative "../../lib/robot_challenge/commands/place"
 require_relative "../../lib/robot_challenge/table"
 require_relative "../../lib/robot_challenge/robot"
 
-describe Command::Place do
+describe Commands::Place do
   let(:table) { Table.new }
   let(:robot) { Robot.new }
   let(:args) { ["2", "2", "North"] }
-  let(:command) { Command::Place.new(args: args, table: table, robot: robot) }
+  let(:command) { Commands::Place.new(args: args, table: table, robot: robot) }
 
   describe "#process" do
     context "when the command is invalid" do

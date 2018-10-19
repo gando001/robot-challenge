@@ -1,4 +1,4 @@
-  module Command
+  module Commands
     class Base
       attr_reader :args, :table, :robot
 

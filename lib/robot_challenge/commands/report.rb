@@ -1,6 +1,6 @@
 require_relative "base"
 
-module Command
+module Commands
   class Report < Base
     def process
       robot.position.to_s
