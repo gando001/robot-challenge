@@ -3,7 +3,7 @@ require_relative "../lib/robot_challenge/simulator"
 
 describe Simulator do
   let(:simulator) do
-  Simulator.new(
+    Simulator.new(
       table: table,
       robot: robot,
       user_interface: user_interface
@@ -20,38 +20,10 @@ describe Simulator do
     let(:robot) { instance_double("Robot") }
     let(:user_interface) { instance_double("UserInterface") }
 
-    def execute_test
-      quit_simulator
-      simulator.run
-    end
-
-    it "stops when issued terminating command" do
+    it "stops when issued a terminating command" do
       expect(simulator).to receive(:request_command).once.and_return(quit_command)
 
-      expect(simulator).to_not receive(:process_request).with(quit_command)
-
       simulator.run
-    end
-
-    context "when the command is empty" do
-      it "continues to ask for commands until a command is given" do
-        5.times do |_|
-          expect(simulator).to receive(:request_command).and_return("")
-        end
-
-        execute_test
-      end
-    end
-
-    context "when the command is known" do
-      let(:command) { "move" }
-
-      it "processes the command" do
-        expect(simulator).to receive(:request_command).and_return(command)
-        expect(simulator).to receive(:process_request).once.with(command)
-
-        execute_test
-      end
     end
   end
 

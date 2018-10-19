@@ -1,3 +1,6 @@
+require_relative "robot_challenge/user_interface"
+require_relative "robot_challenge/table"
+require_relative "robot_challenge/robot"
 require_relative "robot_challenge/simulator"
 
 user_interface = UserInterface.new
