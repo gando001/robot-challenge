@@ -89,6 +89,11 @@ cd robot_challenge
 ruby lib\robot_challenge.rb
 ```
 
+Optionally specify the number of rows and columns for the grid (defaults to a 5x5 grid)
+```
+ruby lib\robot_challenge.rb 10 10
+```
+
 ### Running the Robot Challenge Tests
 
 ```
