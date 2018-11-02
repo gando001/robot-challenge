@@ -1,4 +1,7 @@
 require_relative "spec_helper"
+require_relative "../lib/robot_challenge/table"
+require_relative "../lib/robot_challenge/robot"
+require_relative "../lib/robot_challenge/user_interface"
 require_relative "../lib/robot_challenge/simulator"
 
 describe Simulator do
@@ -39,7 +42,9 @@ describe Simulator do
     end
 
     def check_output
-      expect(simulator).to receive(:report_output).with(expected_output)
+      expected_outputs.each do |e|
+        expect(simulator).to receive(:report_output).with(e)
+      end
     end
 
     def execute_test
@@ -52,7 +57,7 @@ describe Simulator do
 
     context "simple commands; example 1" do
       let(:commands) { ["PLACE 0,0,NORTH", "MOVE", "REPORT"] }
-      let(:expected_output) { "Output: 0,1,NORTH" }
+      let(:expected_outputs) { ["Output: 0,1,NORTH"] }
 
       it "reports 0,1,NORTH" do
         execute_test
@@ -61,7 +66,7 @@ describe Simulator do
 
     context "simple commands; example 2" do
       let(:commands) { ["PLACE 0,0,NORTH", "LEFT", "REPORT"] }
-      let(:expected_output) { "Output: 0,0,WEST" }
+      let(:expected_outputs) { ["Output: 0,0,WEST"] }
 
       it "reports 0,0,WEST" do
         execute_test
@@ -70,7 +75,7 @@ describe Simulator do
 
     context "simple commands; example 3" do
       let(:commands) { ["PLACE 1,2,EAST", "MOVE", "MOVE", "LEFT", "MOVE", "REPORT"] }
-      let(:expected_output) { "Output: 3,3,NORTH" }
+      let(:expected_outputs) { ["Output: 3,3,NORTH"] }
 
       it "reports 3,3,NORTH" do
         execute_test
@@ -79,7 +84,7 @@ describe Simulator do
 
     context "when given commands before a PLACE command" do
       let(:commands) { ["MOVE", "MOVE", "LEFT", "REPORT", "MOVE", "PLACE 1,2,EAST", "REPORT"] }
-      let(:expected_output) { "Output: 1,2,EAST" }
+      let(:expected_outputs) { [nil, "Output: 1,2,EAST"] }
 
       it "ignores all commands before the PLACE command" do
         execute_test
@@ -88,34 +93,27 @@ describe Simulator do
 
     context "when given commands multiple PLACE commands" do
       let(:commands) { ["PLACE 0,0,SOUTH", "REPORT", "PLACE 1,2,EAST", "REPORT", "PLACE 3,4,WEST", "REPORT"] }
-      let(:expected_output_after_first_place_command) { "Output: 0,0,SOUTH" }
-      let(:expected_output_after_second_place_command) { "Output: 1,2,EAST" }
-      let(:expected_output_after_third_place_command) { "Output: 3,4,WEST" }
+      let(:expected_outputs) { ["Output: 0,0,SOUTH", "Output: 1,2,EAST", "Output: 3,4,WEST"] }
 
       it "accepts all PLACE commands" do
-        apply_commands
-
-        expect(simulator).to receive(:report_output).with(expected_output_after_first_place_command)
-        expect(simulator).to receive(:report_output).with(expected_output_after_second_place_command)
-        expect(simulator).to receive(:report_output).with(expected_output_after_third_place_command)
-
-        quit_simulator
-        simulator.run
+        execute_test
       end
     end
 
     context "when given unknown commands" do
       let(:commands) { ["A", "B", "1244", "A(*(@#@#}{>>>,...AS", "PLACE 1,2,EAST", "REPORT"] }
-      let(:expected_output) { "Output: 1,2,EAST" }
+      let(:expected_outputs) { ["Output: 1,2,EAST"] }
 
       it "ignores all unknown commands" do
+        expect(simulator).to receive(:report_output).with("Unknown command!").exactly(4).times
+
         execute_test
       end
     end
 
     context "when trying to move out of bounds" do
       let(:commands) { ["PLACE 0,1,SOUTH", "MOVE", "MOVE", "REPORT"] }
-      let(:expected_output) { "Output: 0,0,SOUTH" }
+      let(:expected_outputs) { ["Output: 0,0,SOUTH"] }
 
       it "prevents from going out of bounds" do
         execute_test
@@ -130,9 +128,11 @@ describe Simulator do
           "UNKNOWN", "mv", " ", "lft", "     ", "MOVE", "LEFT", "REPORT"
         ]
       end
-      let(:expected_output) { "Output: 2,1,EAST" }
+      let(:expected_outputs) { ["Output: 2,1,EAST"] }
 
       it "ignores unknown commands and processes known commands" do
+        expect(simulator).to receive(:report_output).with("Unknown command!").exactly(9).times
+
         execute_test
       end
     end
