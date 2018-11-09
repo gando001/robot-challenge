@@ -1,5 +1,9 @@
 require_relative "commands/report"
 require_relative "commands/unknown"
+require_relative "commands/place"
+require_relative "commands/move"
+require_relative "commands/left"
+require_relative "commands/right"
 
 class Command
   attr_reader :args, :table, :robot
