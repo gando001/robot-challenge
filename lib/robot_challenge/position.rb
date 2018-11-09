@@ -20,4 +20,8 @@ class Position
   def valid_orientation?
     VALID_ORIENTATIONS.include?(orientation)
   end
+
+  def located_at?(position)
+    x == position.x && y == position.y
+  end
 end

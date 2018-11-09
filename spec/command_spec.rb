@@ -116,6 +116,37 @@ describe Command do
         expect(process).to eq("Output: 1,1,NORTH")
       end
     end
+
+    context "when the given the block command" do
+      let(:position) { Position.new(x: 1, y: 1, orientation: Position::NORTH) }
+
+      context "when the robot is located at the obstacles position" do
+        let(:args) { "block 1,1" }
+        let(:robot) { Robot.new(position: position) }
+
+        it "returns nil" do
+          expect(process).to be nil
+        end
+      end
+
+      context "when there is an obstacle located at the given position" do
+        let(:args) { "block 1,1" }
+
+        before { table.obstacles.push(Obstacle.new(position: position)) }
+
+        it "returns nil" do
+          expect(process).to be nil
+        end
+      end
+
+      context "when successfully adding an obstacle at the given position" do
+        let(:args) { "block 1,1" }
+
+        it "returns non-nil" do
+          expect(process).to_not be nil
+        end
+      end
+    end
   end
 
   describe "#response_command?" do

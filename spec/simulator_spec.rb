@@ -136,5 +136,34 @@ describe Simulator do
         execute_test
       end
     end
+
+    context "when given commands multiple BLOCK commands" do
+      let(:commands) { ["BLOCK 0,0", "BLOCK 1,2", "BLOCK 3,4"] }
+      let(:expected_outputs) { [] }
+
+      it "accepts all BLOCK commands" do
+        execute_test
+
+        expect(table.obstacles.count).to be 3
+      end
+    end
+
+    context "when trying to place the robot onto a blocked cell" do
+      let(:commands) { ["BLOCK 0,0", "PLACE 0,0,NORTH", "REPORT", "PLACE 1,1,NORTH", "REPORT"] }
+      let(:expected_outputs) { [nil, "Output: 1,1,NORTH"] }
+
+      it "prevents placing the robot onto a block position" do
+        execute_test
+      end
+    end
+
+    context "when trying to move to a blocked cell" do
+      let(:commands) { ["PLACE 0,0,NORTH", "REPORT", "BLOCK 0,1", "MOVE", "REPORT"] }
+      let(:expected_outputs) { ["Output: 0,0,NORTH", "Output: 0,0,NORTH"] }
+
+      it "prevents the robot moving to a block position" do
+        execute_test
+      end
+    end
   end
 end
