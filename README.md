@@ -20,6 +20,7 @@ MOVE
 LEFT
 RIGHT
 REPORT
+BLOCK X,Y
 ```
 
 * PLACE will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
@@ -28,6 +29,7 @@ REPORT
 * MOVE will move the toy robot one unit forward in the direction it is currently facing.
 * LEFT and RIGHT will rotate the robot 90 degrees in the specified direction without changing the position of the robot.
 * REPORT will announce the X,Y and orientation of the robot.
+* BLOCK will add an obstacle n position X,Y
 * A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands.
 * Provide test data to exercise the application.
 
@@ -35,6 +37,7 @@ REPORT
 
 The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot.
 Any move that would cause the robot to fall must be ignored.
+The robot cannot move or be placed in a position that has an obstacle. An obstacle cannot be placed where the robot is currently positioned.
 
 Example Input and Output:
 
