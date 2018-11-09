@@ -26,4 +26,20 @@ describe Position do
       end
     end
   end
+
+  describe "#located_at?" do
+    context "when the given positions location matches the positions location" do
+      it "returns true" do
+        expect(position.located_at?(position)).to be true
+      end
+    end
+
+    context "when the given positions location does not match the positions location" do
+      let(:another_position) { Position.new(x: 10, y: 0, orientation: orientation) }
+
+      it "returns false" do
+        expect(position.located_at?(another_position)).to be false
+      end
+    end
+  end
 end

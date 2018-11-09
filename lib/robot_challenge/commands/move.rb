@@ -5,7 +5,7 @@ module Commands
     STEP = 1
 
     def process
-      robot.move_to(next_position)
+      robot.move_to(next_position) unless table.obstacle_at?(next_position)
     end
 
     private
